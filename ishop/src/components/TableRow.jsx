@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-export const Item = ({ product }) => {
+export const TableRow = ({product}) => {
 
-  Item.propTypes = {
-    product: PropTypes.object.isRequired
+  TableRow.propTypes = {
+    product: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
   }
 
   return (
