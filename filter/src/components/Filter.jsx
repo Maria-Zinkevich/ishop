@@ -12,9 +12,8 @@ export const Filter = ({ arrayToFilter }) => {
   const [sortedArray, setSortedArray] = useState(arrayToFilter);
 
   function checkbox () {
-    setIsChecked(!isChecked);
     if (!isChecked) {
-      let arr = arrayToFilter.slice()
+      let arr = sortedArray.slice()
       setSortedArray(arr.sort());
     } else {
       setSortedArray(arrayToFilter);
