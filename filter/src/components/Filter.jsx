@@ -25,12 +25,12 @@ export const Filter = ({ arrayToFilter }) => {
   function filter (event) {
     setInputValue(event.target.value);
     if (event.target.value.trim() === "") {
-      setProcessedArray(arrayToFilter);
+      !isChecked ? setProcessedArray(arrayToFilter) : setProcessedArray([...arrayToFilter].sort());
     } else {
       let filteredArray = arrayToFilter.filter((item) =>{
         return item.toLowerCase().includes(event.target.value.toLowerCase());
       });
-      setProcessedArray(filteredArray);
+      !isChecked ? setProcessedArray(filteredArray) : setProcessedArray([...filteredArray].sort());
     }
   }
 
