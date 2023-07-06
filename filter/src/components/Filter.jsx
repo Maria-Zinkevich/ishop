@@ -26,8 +26,8 @@ export const Filter = ({ arrayToFilter }) => {
     setIsChecked(e.target.checked);
   }
 
-  function filter (event) {
-    setInputValue(event.target.value);
+  function filter (e) {
+    setInputValue(e.target.value);
   }
 
   function reset() {
