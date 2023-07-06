@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const Filter = ({ arrayToFilter }) => {
 
@@ -12,26 +12,22 @@ export const Filter = ({ arrayToFilter }) => {
   const [inputValue, setInputValue] = useState("");
   const [processedArray, setProcessedArray] = useState(arrayToFilter);
 
-  function sort () {
-    setIsChecked(!isChecked);
-    if (!isChecked) {
-      setProcessedArray([...processedArray].sort());
-    } else {
-      let filteredArray = arrayToFilter.filter(element => processedArray.includes(element));
-      setProcessedArray(filteredArray);
-    }
+  useEffect(
+    () =>{
+      let currentValue = [...arrayToFilter];
+      if (inputValue !== "") currentValue = currentValue.filter(item => item.includes(inputValue) === true);
+      if (isChecked) currentValue.sort();
+      setProcessedArray(currentValue);
+    },
+    [isChecked, inputValue]
+  );
+
+  function sort (e) {
+    setIsChecked(e.target.checked);
   }
 
   function filter (event) {
     setInputValue(event.target.value);
-    if (event.target.value.trim() === "") {
-      !isChecked ? setProcessedArray(arrayToFilter) : setProcessedArray([...arrayToFilter].sort());
-    } else {
-      let filteredArray = arrayToFilter.filter((item) =>{
-        return item.toLowerCase().includes(event.target.value.toLowerCase());
-      });
-      !isChecked ? setProcessedArray(filteredArray) : setProcessedArray([...filteredArray].sort());
-    }
   }
 
   function reset() {
