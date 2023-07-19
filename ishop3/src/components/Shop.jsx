@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Product } from './Product';
 import { ProductCardToShow } from './ProductCardToShow';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { ProductEdit } from './ProductEdit';
 
 export const Shop = ({ shopname, productsArray }) => {
@@ -14,6 +14,19 @@ export const Shop = ({ shopname, productsArray }) => {
   const [editProduct, setEditProduct] = useState(false);
   const [showProduct, setShowProduct] = useState(false);
   const [editableProduct, setEditableProduct] = useState(null);
+  const [save, setSave] = useState(null);
+
+  useEffect(
+    () =>{
+    if(save !==null) products.forEach((item,index) =>{
+        if(item.sku === save.sku) {
+          products[index] = save;
+        }
+      });
+      setProducts(products);
+    },
+    [save,products]
+  );
 
   const handleItemClick = (productSku) => {
     setSelectedProductSkuToShow(productSku);
@@ -66,7 +79,7 @@ export const Shop = ({ shopname, productsArray }) => {
           </tbody>
         </table>
         {!!showProduct && <ProductCardToShow selectedProductSkuToShow={selectedProductSkuToShow} chosenProduct={getCurrentProduct(selectedProductSkuToShow)[0]} />}
-        {!!editProduct && <ProductEdit  product={getCurrentProduct(editableProduct.sku)[0]} /> }
+        {!!editProduct && <ProductEdit key={editableProduct.sku} setSave={setSave} product={getCurrentProduct(editableProduct.sku)[0]} /> }
     </div>
   )
 }
