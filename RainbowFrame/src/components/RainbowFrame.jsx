@@ -24,7 +24,6 @@ class RainbowFrame extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colors: props.colors,
       childToRender: props.children
     };
   };
@@ -41,10 +40,10 @@ class RainbowFrame extends Component {
 
   processedChildToRender =() => {
     let updateChildToRender = this.props.children;
-    this.state.colors.forEach((color) => {  
+    this.props.colors.forEach((color) => {  
       updateChildToRender = <div style={{padding: "5px",border:`solid 5px ${color}`}}>{updateChildToRender}</div> 
-      this.setState({childToRender: updateChildToRender})
     })
+    this.setState({childToRender: updateChildToRender})
   }
 
   render() {

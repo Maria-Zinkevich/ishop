@@ -1,6 +1,6 @@
 import React from 'react';
 
-const withRainbowFrame = (WrappedComponent) => (colors) => {
+const withRainbowFrame = (colors) => (WrappedComponent) => {
   return class extends React.Component {
     render() {
       let content = <WrappedComponent {...this.props} />;

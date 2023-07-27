@@ -5,7 +5,7 @@ import withRainbowFrame from './components/withRainbowFrame';
 
 let colors = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
 
-const FramedDoubleButton = withRainbowFrame(DoubleButton)(colors);
+const FramedDoubleButton = withRainbowFrame(colors)(DoubleButton);
 
 class App extends Component {
   render() {
