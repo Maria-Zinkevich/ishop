@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 import MobileClient from './MobileClient';
-import { deleteClient } from './events';
+import { deleteClient, editClient } from './events';
 
 class MobileCompany extends React.PureComponent {
   state = {
@@ -15,10 +15,12 @@ class MobileCompany extends React.PureComponent {
 
   componentDidMount = () => {
     deleteClient.addListener('deleteClient', this.handleDeleteClient);
+    editClient.addListener('editClient', this.handleEditClient);
   }
 
   componentWillUnmount = () => {
     deleteClient.removeListener('deleteClient', this.handleDeleteClient);
+    editClient.removeListener('editClient', this.handleEditClient);
   }
 
   handleFilterChange = (filter) => {
@@ -27,7 +29,7 @@ class MobileCompany extends React.PureComponent {
 
   handleAddClient = () => {
     const { clients } = this.state;
-    const newClient = { id: clients.length + 1, surname: '', name: '', balance: 0, isActive: false};
+    const newClient = { id: clients.length + 1, surname: window.prompt("surname"), name: window.prompt("name"), balance:window.prompt("balance"), isActive: false};
     this.setState({ clients: [...clients, newClient] });
   }
 
@@ -37,6 +39,12 @@ class MobileCompany extends React.PureComponent {
     this.setState({ clients: newClients })
   }
 
+  handleEditClient = (id) => {
+
+  }
+  handleValueChange = (newValue) => {
+    console.log('Новое значение:', newValue);
+  }
   render() {
     console.log("MobileCompany render");
     const { clients, filter } = this.state;
@@ -64,7 +72,7 @@ class MobileCompany extends React.PureComponent {
               if (filter === 'active') return client.isActive;
               if (filter === 'blocked') return !client.isActive;}).map((client, index) => <MobileClient
                   id={client.id} 
-                  key={index} 
+                  key={client.id} 
                   client={client}
                 />
             )}
