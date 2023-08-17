@@ -1,0 +1,9 @@
+#scroll-wrap {
+  height: 100px;
+  overflow-y: auto;
+}
+.App {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
