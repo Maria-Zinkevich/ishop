@@ -23,18 +23,17 @@ export const Filter = ({ arrayToFilter }) => {
     [isChecked, inputValue]
   );
 
-  function sort (e) {
-    setIsChecked(e.target.checked);
+  function sort (isChecked) {
+    setIsChecked(isChecked);
   }
 
-  function filter (e) {
-    setInputValue(e.target.value);
+  function filter (inputValue) {
+    setInputValue(inputValue);
   }
 
   function reset() {
-    setInputValue("");
-    setIsChecked(false);
-    setProcessedArray(arrayToFilter);
+    sort(false); 
+    filter("");
   }
 
   return (
@@ -42,9 +41,10 @@ export const Filter = ({ arrayToFilter }) => {
       <Controls
         isChecked={isChecked}
         inputValue={inputValue}
-        sort={sort}
-        filter={filter} 
-        reset={reset} />
+        setInputValue={setInputValue}
+        setIsChecked={setIsChecked}
+        reset={reset}
+      />
       <List processedArray={processedArray} />
     </>
   )
